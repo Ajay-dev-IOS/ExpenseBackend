@@ -5,6 +5,7 @@ import com.example.SpringExpense.IO.ExpenseResponse;
 import com.example.SpringExpense.Service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ExpenseController {
     private final ExpenseService expenseService;
     private final ModelMapper modelMapper;

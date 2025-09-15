@@ -1,7 +1,9 @@
 package com.example.SpringExpense;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringExpenseApplication {
@@ -9,5 +11,8 @@ public class SpringExpenseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringExpenseApplication.class, args);
 	}
-
+    @Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }

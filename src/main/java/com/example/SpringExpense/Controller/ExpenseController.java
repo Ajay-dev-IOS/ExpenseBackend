@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,6 +24,12 @@ public class ExpenseController {
         List<ExpenseDTO> list = expenseService.getAllExpenses();
         List<ExpenseResponse> expenseResponses = list.stream().map(expenseDTO -> mapToExpenseDTO(expenseDTO)).collect(Collectors.toList());
         return  expenseResponses;
+    }
+
+    @GetMapping("/expenses/{expenseID}")
+    public ExpenseResponse getExpenseById(@PathVariable String expenseID) {
+       ExpenseDTO expenseDTO = expenseService.getExpenseByExpenseId(expenseID);
+       return mapToExpenseDTO(expenseDTO);
     }
 
     public ExpenseResponse mapToExpenseDTO(ExpenseDTO expenseDTO) {

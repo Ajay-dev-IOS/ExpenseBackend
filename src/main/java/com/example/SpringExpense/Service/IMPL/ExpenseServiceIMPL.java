@@ -2,6 +2,7 @@ package com.example.SpringExpense.Service.IMPL;
 
 import com.example.SpringExpense.DTO.ExpenseDTO;
 import com.example.SpringExpense.Entity.ExpenseEntity;
+import com.example.SpringExpense.Exceptions.ResourceNotFound;
 import com.example.SpringExpense.Repository.ExpenseRepository;
 import com.example.SpringExpense.Service.ExpenseService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,14 @@ public class ExpenseServiceIMPL implements ExpenseService {
         return listOfExpenses;
 
     }
+
+    @Override
+    public ExpenseDTO getExpenseByExpenseId(String expenseID) {
+        ExpenseEntity optionalExpense = expenseRepository.findByExpenseID(expenseID)
+                .orElseThrow(() -> new ResourceNotFound("expense not found for the expense id "+ expenseID));
+        return  mapToExpenseDTO(optionalExpense);
+    }
+
     public  ExpenseDTO mapToExpenseDTO(ExpenseEntity expenseEntity) {
         return modelMapper.map(expenseEntity, ExpenseDTO.class);
     }
